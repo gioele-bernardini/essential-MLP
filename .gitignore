@@ -1,0 +1,26 @@
+# Ignore the build directory
+/build/
+
+# Ignore common system files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore IDE configuration files
+*.idea/
+*.vscode/
+*.swp
+
+# Ignore binary files
+*.exe
+*.out
+*.dll
+*.so
+*.dylib
+
+# Ignore temporary files
+*.tmp
+*.temp
+
