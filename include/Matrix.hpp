@@ -19,6 +19,8 @@ public:
 
   int getNumRows() { return this->numRows; }
   int getNumCols() { return this->numCols; }
+
+  void printToConsole();
 private:
   int numRows;
   int numCols;
