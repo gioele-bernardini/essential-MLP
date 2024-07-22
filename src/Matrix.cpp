@@ -41,12 +41,17 @@ Matrix* Matrix::transpose() {
   // isRandom false for the new Matrix, just setting up zero's for now
   Matrix* m = new Matrix(this->numCols, this->numRows, false);
 
+  // std::cout << "Transposing matrix:" << std::endl;
   for (int i = 0; i < numRows; i++) {
     for (int j = 0; j < numCols; j++) {
-      m->setValue(i, j, this->getValue(j, i));
+      // std::cout << "Transposing element (" << i << ", " << j << "): " << this->getValue(i, j) << std::endl;
+      m->setValue(j, i, this->getValue(i, j)); // Indici invertiti
     }
   }
+
+  return m;
 }
+
 
 void Matrix::printToConsole() {
   for (int i = 0; i < numRows; i++) {

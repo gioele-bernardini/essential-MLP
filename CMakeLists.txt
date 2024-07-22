@@ -11,6 +11,8 @@ include_directories(include)
 # Add the library
 add_library(essential-MLP-lib
   src/Neuron.cpp
+  src/Layer.cpp
+  src/Matrix.cpp
 )
 
 # Add the executable
