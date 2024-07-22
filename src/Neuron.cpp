@@ -21,3 +21,10 @@ void Neuron::derive() {
   this ->derivedVal = this->activatedVal * (1 - this->activatedVal);
 }
 
+void Neuron::setVal(double val) {
+  this->val = val;
+
+  activate();
+  derive();
+}
+
