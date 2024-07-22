@@ -29,7 +29,7 @@ double Matrix::generateRandomNumber() {
   return dis(gen);
 }
 
-Matrix::printToConsole() {
+void Matrix::printToConsole() {
   for (int i = 0; i < numRows; i++) {
     for (int j = 0; j < numCols; j++) {
       cout << this->values.at(i).at(j) << "\t\t";
