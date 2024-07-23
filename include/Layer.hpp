@@ -2,6 +2,7 @@
 #define _LAYER_HPP_
 
 #include "Neuron.hpp"
+#include "Matrix.hpp"
 #include <iostream>
 #include <vector>
 
@@ -11,6 +12,9 @@ class Layer {
 public:
 
   Layer(int size);
+
+  void setVal(int i, double v);
+  Matrix* toMatrix();
 private:
 
   int size;

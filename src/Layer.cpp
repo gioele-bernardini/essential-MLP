@@ -9,3 +9,9 @@ Layer::Layer(int size) {
   }
 }
 
+void Layer::setVal(int i, double v) {
+  this->neurons.at(i)->setVal(v);
+}
+
+Matrix* Layer::toMatrix
+
