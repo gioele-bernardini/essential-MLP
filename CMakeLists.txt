@@ -21,6 +21,7 @@ add_executable(essential-MLP
 )
 
 # Link the executable with the library
+# Tell to link the library with the executable
 target_link_libraries(essential-MLP essential-MLP-lib)
 
 # Enable testing
