@@ -13,10 +13,14 @@ public:
 
   void setCurrentInput(vector<double> input);
 private:
+  // The number of layers
   int topologySize;
 
+  // The vector for the size of the layers
   vector<int> topology;
   vector<Layer *> layers;
+  
+  // Contains the weight between one layer and the next one
   vector<Matrix *> weightMatrices;
 
   vector<double> input;

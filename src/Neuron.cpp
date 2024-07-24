@@ -1,4 +1,4 @@
-#include "../include/Neuron.hpp"
+#include "Neuron.hpp"
 #include <cmath>
 
 // Constructor

@@ -1,4 +1,4 @@
-#include "../include/Layer.hpp"
+#include "Layer.hpp"
 
 Layer::Layer(int size) {
   this->size = size;
@@ -13,5 +13,5 @@ void Layer::setVal(int i, double v) {
   this->neurons.at(i)->setVal(v);
 }
 
-Matrix* Layer::toMatrix
+// Matrix* Layer::toMatrix
 

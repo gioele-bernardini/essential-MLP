@@ -1,4 +1,4 @@
-#include "../include/NeuralNetwork.hpp"
+#include "NeuralNetwork.hpp"
 #include <vector>
 
 NeuralNetwork::NeuralNetwork(vector<int> topology) {
@@ -10,6 +10,7 @@ NeuralNetwork::NeuralNetwork(vector<int> topology) {
     this->layers.push_back(l);
   }
 
+  // (topologySize -1) as the last Layer needs no such matrix
   for (int i = 0; i < (topologySize -1); i++) {
     Matrix* m = new Matrix(topology.at(i), topology.at(i +1), true);
 
@@ -21,6 +22,7 @@ void NeuralNetwork::setCurrentInput(vector<double> input) {
   this->input = input;
 
   for (int i = 0; i < input.size(); i++) {
+    // Set the values in the layer [0] (input layer)
     this->layers.at(0)->setVal(i, input.at(i));
   }
 }
