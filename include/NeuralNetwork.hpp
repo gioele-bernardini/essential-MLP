@@ -19,6 +19,9 @@ public:
   const vector<Layer*>& getLayers() const { return layers; }
   const vector<Matrix*>& getWeightMatrices() const { return weightMatrices; }
 
+  void printToConsole();
+  void printWeightMatrix(int i);
+
 private:
   // The number of layers
   int topologySize;

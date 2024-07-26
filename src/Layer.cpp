@@ -22,7 +22,7 @@ Matrix* Layer::toMatrixVals() {
 
   for (int i = 0; i < this->neurons.size(); i++) {
     m->setValue(
-      1,
+      0,
       i,
       this->neurons.at(i)->getVal()
     );
@@ -36,7 +36,7 @@ Matrix* Layer::toMatrixActivatedVals() {
 
   for (int i = 0; i < this->neurons.size(); i++) {
     m->setValue(
-      1,
+      0,
       i,
       this->neurons.at(i)->getActivatedVal()
     );
