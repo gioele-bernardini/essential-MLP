@@ -12,6 +12,13 @@ public:
   NeuralNetwork(vector<int> topology);
 
   void setCurrentInput(vector<double> input);
+
+  // Getter methods mainly for testing
+  int getTopologySize() const { return topologySize; }
+  const vector<int>& getTopology() const { return topology; }
+  const vector<Layer*>& getLayers() const { return layers; }
+  const vector<Matrix*>& getWeightMatrices() const { return weightMatrices; }
+
 private:
   // The number of layers
   int topologySize;

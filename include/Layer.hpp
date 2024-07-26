@@ -14,7 +14,12 @@ public:
   Layer(int size);
 
   void setVal(int i, double v);
-  Matrix* toMatrix();
+
+  double getVal(int i);
+
+  Matrix* toMatrixVals();
+  Matrix* toMatrixActivatedVals();
+  Matrix* toMatrixDerivedVals();
 private:
 
   int size;

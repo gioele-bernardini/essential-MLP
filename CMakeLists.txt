@@ -13,6 +13,7 @@ add_library(essential-MLP-lib
   src/Neuron.cpp
   src/Layer.cpp
   src/Matrix.cpp
+  src/NeuralNetwork.cpp
 )
 
 # Add the executable
