@@ -13,7 +13,7 @@ namespace utils {
   public:
     MatrixToVector(Matrix* a);
 
-    vector<double>* execute();
+    vector<double> execute();
   private:
     Matrix* a;
   };

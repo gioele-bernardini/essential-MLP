@@ -1,9 +1,10 @@
-#include "../../include/utils/MatrixToVector.hpp"
+#include "utils/MatrixToVector.hpp"
 
 utils::MatrixToVector::MatrixToVector(Matrix* a) {
   this->a = a;
 }
 
+// TOFIX
 vector<double> utils::MatrixToVector::execute() {
   vector<double> result;
 
