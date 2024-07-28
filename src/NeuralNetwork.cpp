@@ -1,4 +1,5 @@
 #include "NeuralNetwork.hpp"
+#include "utils/MultiplyMatrix.hpp"
 #include <vector>
 
 NeuralNetwork::NeuralNetwork(vector<int> topology) {
@@ -46,5 +47,39 @@ void NeuralNetwork::printToConsole() {
 
 void NeuralNetwork::printWeightMatrix(int i) {
   this->weightMatrices.at(i)->printToConsole();
+}
+
+void NeuralNetwork::feedForward() {
+  for (int i = 0; i < (this->layers.size() -1); i++) {
+    Matrix* a = this->getNeuronMatrix(i);
+
+    if (i != 0) {
+      a = this->getActivatedNeuronMatrix(i);
+    }
+
+    Matrix* b = this->getWeightMatrix(i);
+    Matrix* c = (new utils::MultiplyMatrix(a, b))->execute();
+
+    vector<double> vals;
+    for (int c_index = 0; c_index < c->getNumCols(); c_index++) {
+      vals.push_back(c->getValue(0, c_index));
+    }
+  }
+}
+
+Matrix* NeuralNetwork::getNeuronMatrix(int i) {
+  return this->layers.at(i)->toMatrixVals();
+}
+
+Matrix* NeuralNetwork::getActivatedNeuronMatrix(int i) {
+  return this->layers.at(i)->toMatrixActivatedVals();
+}
+
+Matrix* NeuralNetwork::getDerivedNeuronMatrix(int i) {
+  return this->layers.at(i)->toMatrixDerivedVals();
+}
+
+Matrix* NeuralNetwork::getWeightMatrix(int i) {
+  return this->weightMatrices.at(i);
 }
 

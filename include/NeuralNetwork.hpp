@@ -13,11 +13,20 @@ public:
 
   void setCurrentInput(vector<double> input);
 
+  void feedForward();
+
   // Getter methods mainly for testing
   int getTopologySize() const { return topologySize; }
   const vector<int>& getTopology() const { return topology; }
   const vector<Layer*>& getLayers() const { return layers; }
   const vector<Matrix*>& getWeightMatrices() const { return weightMatrices; }
+
+  // Getter for the neurons matrices
+  Matrix* getNeuronMatrix(int i);
+  Matrix* getActivatedNeuronMatrix(int i);
+  Matrix* getDerivedNeuronMatrix(int i);
+
+  Matrix* getWeightMatrix(int i);
 
   void printToConsole();
   void printWeightMatrix(int i);
