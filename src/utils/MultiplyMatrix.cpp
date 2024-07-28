@@ -13,6 +13,9 @@ utils::MultiplyMatrix::MultiplyMatrix(Matrix* a, Matrix* b) {
   this->c = new Matrix(a->getNumRows(), b->getNumCols(), false);
 }
 
+// "ijk" algorithm:
+// i loops through A rows; j loops through B columns,
+// k through A columns in i-row and B rows in j-column
 Matrix* utils::MultiplyMatrix::execute() {
   for (int i = 0; i < a->getNumRows(); i++) {
     for (int j = 0; j < b->getNumCols(); j++) {
