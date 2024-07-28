@@ -15,6 +15,7 @@ add_library(essential-MLP-lib
   src/Matrix.cpp
   src/NeuralNetwork.cpp
   src/utils/MatrixToVector.cpp
+  src/utils/MultiplyMatrix.cpp
 )
 
 # Add the executable

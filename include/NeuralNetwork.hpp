@@ -21,6 +21,11 @@ public:
   const vector<Layer*>& getLayers() const { return layers; }
   const vector<Matrix*>& getWeightMatrices() const { return weightMatrices; }
 
+  // Setter methods
+  void setNeuronValue(int indexLayer, int indexNeuron, double val) {
+    this->layers.at(indexLayer)->setVal(indexNeuron, val);
+  }
+
   // Getter for the neurons matrices
   Matrix* getNeuronMatrix(int i);
   Matrix* getActivatedNeuronMatrix(int i);

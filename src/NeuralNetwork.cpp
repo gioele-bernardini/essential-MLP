@@ -49,6 +49,7 @@ void NeuralNetwork::printWeightMatrix(int i) {
   this->weightMatrices.at(i)->printToConsole();
 }
 
+// Feed Forward algorithm
 void NeuralNetwork::feedForward() {
   for (int i = 0; i < (this->layers.size() -1); i++) {
     Matrix* a = this->getNeuronMatrix(i);
@@ -60,9 +61,8 @@ void NeuralNetwork::feedForward() {
     Matrix* b = this->getWeightMatrix(i);
     Matrix* c = (new utils::MultiplyMatrix(a, b))->execute();
 
-    vector<double> vals;
     for (int c_index = 0; c_index < c->getNumCols(); c_index++) {
-      vals.push_back(c->getValue(0, c_index));
+      this->setNeuronValue(i +1, c_index, c->getValue(0, c_index));
     }
   }
 }
