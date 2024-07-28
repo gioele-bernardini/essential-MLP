@@ -51,21 +51,34 @@ void NeuralNetwork::printWeightMatrix(int i) {
 
 // Feed Forward algorithm
 void NeuralNetwork::feedForward() {
-  for (int i = 0; i < (this->layers.size() -1); i++) {
+  for (int i = 0; i < (this->layers.size() - 1); i++) {
+    // Get the neuron matrix for the current layer
     Matrix* a = this->getNeuronMatrix(i);
 
+    // If not the input layer, get the activated neuron matrix
     if (i != 0) {
+      delete a; // Delete the previous matrix to prevent memory leak
       a = this->getActivatedNeuronMatrix(i);
     }
 
+    // Get the weight matrix for the current layer
     Matrix* b = this->getWeightMatrix(i);
-    Matrix* c = (new utils::MultiplyMatrix(a, b))->execute();
 
+    // Multiply the matrices a and b
+    utils::MultiplyMatrix multiplyMatrix(a, b);
+    Matrix* c = multiplyMatrix.execute();
+
+    // Set the values in the next layer's neurons
     for (int c_index = 0; c_index < c->getNumCols(); c_index++) {
-      this->setNeuronValue(i +1, c_index, c->getValue(0, c_index));
+      this->setNeuronValue(i + 1, c_index, c->getValue(0, c_index));
     }
+
+    // Clean up memory
+    delete a;
+    delete c;
   }
 }
+
 
 Matrix* NeuralNetwork::getNeuronMatrix(int i) {
   return this->layers.at(i)->toMatrixVals();

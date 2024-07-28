@@ -11,7 +11,8 @@ Matrix::Matrix(int numRows, int numCols, bool isRandom) {
     for (int j = 0; j < numCols; j++) {
       double r = 0.00;
       if (isRandom) {
-        double r = this->generateRandomNumber();
+        r = this->generateRandomNumber();
+        std::cout << "Random Value Generated: " << r << std::endl; // Debug
       }
 
       colValues.push_back(r);
@@ -45,7 +46,7 @@ Matrix* Matrix::transpose() {
   for (int i = 0; i < numRows; i++) {
     for (int j = 0; j < numCols; j++) {
       // std::cout << "Transposing element (" << i << ", " << j << "): " << this->getValue(i, j) << std::endl;
-      m->setValue(j, i, this->getValue(i, j)); // Indici invertiti
+      m->setValue(j, i, this->getValue(i, j)); // Inverted Indexes!
     }
   }
 
