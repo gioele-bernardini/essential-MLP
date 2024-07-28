@@ -1,4 +1,4 @@
-#include "../include/Matrix.hpp"
+#include "Matrix.hpp"
 #include <random>
 
 Matrix::Matrix(int numRows, int numCols, bool isRandom) {
