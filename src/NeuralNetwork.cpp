@@ -79,6 +79,24 @@ void NeuralNetwork::feedForward() {
   }
 }
 
+void NeuralNetwork::setErrors() {
+  if (this->target.size() == 0) {
+    cerr << "No target for this neural network" << endl;
+    assert(false);
+  }
+
+  // TODO: check whether the target size is equal to output layer size
+
+  this->error = 0.00;
+  int outputLayerIndex = this->layers.size() -1;
+  vector<Neuron*> outputNeurons = this->layers.at(outputLayerIndex)->getNeurons();
+
+  for (int i = 0; i < target.size(); i++) {
+    double tempErr = (outputNeurons.at(i)->getActivatedVal() - target.at(i));
+    errors.at(i) = tempErr;
+    this->error += tempErr;
+  }
+}
 
 Matrix* NeuralNetwork::getNeuronMatrix(int i) {
   return this->layers.at(i)->toMatrixVals();

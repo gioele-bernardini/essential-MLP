@@ -14,6 +14,7 @@ public:
   void setCurrentInput(vector<double> input);
 
   void feedForward();
+  void setErrors();
 
   // Getter methods mainly for testing
   int getTopologySize() const { return topologySize; }
@@ -36,6 +37,9 @@ public:
   void printToConsole();
   void printWeightMatrix(int i);
 
+  double getTotalError() { return this->error; }
+  vector<double> getErrors() { return this->errors; }
+
 private:
   // The number of layers
   int topologySize;
@@ -48,6 +52,12 @@ private:
   vector<Matrix *> weightMatrices;
 
   vector<double> input;
+
+  // For the Error
+  vector<double> target;
+  double error;
+  vector<double> errors;
+  vector<double> historicalErrors;
 };
 
 #endif

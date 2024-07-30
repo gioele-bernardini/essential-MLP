@@ -16,6 +16,10 @@ void Layer::setVal(int i, double v) {
 double Layer::getVal(int i) {
   return this->neurons.at(i)->getVal();
 }
+  
+vector<Neuron*> Layer::getNeurons() {
+  return this->neurons;
+}
 
 Matrix* Layer::toMatrixVals() {
   Matrix* m = new Matrix(1, this->neurons.size(), false);

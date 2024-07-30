@@ -15,11 +15,13 @@ public:
 
   void setVal(int i, double v);
 
-  double getVal(int i);
 
   Matrix* toMatrixVals();
   Matrix* toMatrixActivatedVals();
   Matrix* toMatrixDerivedVals();
+
+  double getVal(int i);
+  vector<Neuron*> getNeurons();
 private:
 
   int size;
