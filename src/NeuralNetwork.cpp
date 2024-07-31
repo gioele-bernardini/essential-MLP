@@ -85,7 +85,13 @@ void NeuralNetwork::setErrors() {
     assert(false);
   }
 
-  // TODO: check whether the target size is equal to output layer size
+  if (this->target.size() != this->layers.at(this->layers.size() -1)->getNeurons().size()) {
+    cerr << "Target size is not the same as output layer size: " << this->layers.at(this->layers.size() -1)->getNeurons().size() << endl;
+    assert(false);
+  }
+
+  // Initialize the errors vector
+  errors.resize(this->target.size());
 
   this->error = 0.00;
   int outputLayerIndex = this->layers.size() -1;
@@ -96,6 +102,8 @@ void NeuralNetwork::setErrors() {
     errors.at(i) = tempErr;
     this->error += tempErr;
   }
+
+  historicalErrors.push_back(this->error);
 }
 
 Matrix* NeuralNetwork::getNeuronMatrix(int i) {

@@ -12,6 +12,9 @@ public:
   NeuralNetwork(vector<int> topology);
 
   void setCurrentInput(vector<double> input);
+  void setCurrentTarget(vector<double> target) {
+    this->target = target;
+  }
 
   void feedForward();
   void setErrors();
