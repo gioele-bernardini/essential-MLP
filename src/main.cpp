@@ -21,6 +21,8 @@ int main(int argc, char** argv) {
   nn->feedForward();
   nn->setErrors();
 
+  nn->backPropagation();
+
   nn->printToConsole();
 
   cout << "Total Error" << nn->getTotalError() << endl;
