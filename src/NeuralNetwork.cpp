@@ -1,4 +1,5 @@
 #include "NeuralNetwork.hpp"
+#include "Matrix.hpp"
 #include "utils/MultiplyMatrix.hpp"
 #include <vector>
 
@@ -108,7 +109,21 @@ void NeuralNetwork::setErrors() {
 
 void NeuralNetwork::backPropagation() {
   // Output to hidden
-  
+  int outputLayerIndex = this->layers.size() -1;
+  Matrix* derivedValuesYToZ = this->layers.at(outputLayerIndex)->toMatrixDerivedVals();
+
+  // Matrix for the gradients, isRandom false just for good practice
+  Matrix* gradientsYToZ = new Matrix(1, this->layers.at(outputLayerIndex)->getNeurons().size(), false);
+
+  for (int i = 0; i < this->errors.size(); i++) {
+    double d = derivedValuesYToZ->getValue(0, i);
+    double e = this->errors.at(i);
+    double g = d * e;
+
+    gradientsYToZ->setValue(0, i, g);
+  }
+
+  for (int i = 0; )
 }
 
 Matrix* NeuralNetwork::getNeuronMatrix(int i) {
