@@ -123,7 +123,16 @@ void NeuralNetwork::backPropagation() {
     gradientsYToZ->setValue(0, i, g);
   }
 
-  for (int i = 0; )
+  int lastHiddenLayerIndex = outputLayerIndex -1;
+  Layer* lastHiddenLayer = this->layers.at(lastHiddenLayerIndex);
+  
+  Matrix* weightsOutputHidden = this->weightMatrices.at(outputLayerIndex -1);
+  Matrix* deltaOutputHidden = (new utils::MultiplyMatrix(gradientsYToZ->transpose(), lastHiddenLayer->toMatrixActivatedVals()))->execute();
+
+  // Moving from last hidden layer down to input layer
+  for (int i = outputLayerIndex -1; i >= 0; i--) {
+
+  }
 }
 
 Matrix* NeuralNetwork::getNeuronMatrix(int i) {
