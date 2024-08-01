@@ -116,7 +116,6 @@ void NeuralNetwork::backPropagation() {
   int outputLayerIndex = this->layers.size() - 1;
   cout << "Output layer index: " << outputLayerIndex << endl;
 
-  // TOFIX: This causes Out Of Bound error
   Matrix* derivedValuesYToZ = this->layers.at(outputLayerIndex)->toMatrixDerivedVals();
   cout << "derivedValuesYToZ created with dimensions: " << derivedValuesYToZ->getNumRows() << "x" << derivedValuesYToZ->getNumCols() << endl;
 

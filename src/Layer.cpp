@@ -54,7 +54,7 @@ Matrix* Layer::toMatrixDerivedVals() {
 
   for (int i = 0; i < this->neurons.size(); i++) {
     m->setValue(
-      1,
+      0,
       i,
       this->neurons.at(i)->getDerivedVal()
     );
