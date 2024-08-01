@@ -106,6 +106,11 @@ void NeuralNetwork::setErrors() {
   historicalErrors.push_back(this->error);
 }
 
+void NeuralNetwork::backPropagation() {
+  // Output to hidden
+  
+}
+
 Matrix* NeuralNetwork::getNeuronMatrix(int i) {
   return this->layers.at(i)->toMatrixVals();
 }

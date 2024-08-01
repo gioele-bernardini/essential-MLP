@@ -17,6 +17,7 @@ public:
   }
 
   void feedForward();
+  void backPropagation();
   void setErrors();
 
   // Getter methods mainly for testing
@@ -53,6 +54,8 @@ private:
   
   // Contains the weight between one layer and the next one
   vector<Matrix *> weightMatrices;
+  // Contains the gradients needed for the back propagation
+  vector<Matrix*> gradientMatrices;
 
   vector<double> input;
 
