@@ -108,8 +108,10 @@ void NeuralNetwork::setErrors() {
 }
 
 void NeuralNetwork::backPropagation() {
+  vector<Matrix*> newWeights;
+
   // Output to hidden
-  int outputLayerIndex = this->layers.size() -1;
+  int outputLayerIndex = this->layers.size() - 1;
   Matrix* derivedValuesYToZ = this->layers.at(outputLayerIndex)->toMatrixDerivedVals();
 
   // Matrix for the gradients, isRandom false just for good practice
@@ -123,17 +125,24 @@ void NeuralNetwork::backPropagation() {
     gradientsYToZ->setValue(0, i, g);
   }
 
-  int lastHiddenLayerIndex = outputLayerIndex -1;
+  int lastHiddenLayerIndex = outputLayerIndex - 1;
   Layer* lastHiddenLayer = this->layers.at(lastHiddenLayerIndex);
   
-  Matrix* weightsOutputHidden = this->weightMatrices.at(outputLayerIndex -1);
+  Matrix* weightsOutputHidden = this->weightMatrices.at(outputLayerIndex - 1);
   Matrix* deltaOutputHidden = (new utils::MultiplyMatrix(gradientsYToZ->transpose(), lastHiddenLayer->toMatrixActivatedVals()))->execute();
 
-  // Moving from last hidden layer down to input layer
-  for (int i = outputLayerIndex -1; i >= 0; i--) {
+  Matrix* newWeightsOutputToHidden = new Matrix(deltaOutputHidden->getNumRows(), deltaOutputHidden->getNumCols(), false);
 
+  for (int r = 0; r < deltaOutputHidden->getNumRows(); r++) {
+    for (int c = 0; c < deltaOutputHidden->getNumCols(); c++) {
+      double originalWeight = weightsOutputHidden->getValue(r, c);
+      double deltaWeight = deltaOutputHidden->getValue(r, c);
+
+      newWeightsOutputToHidden->setValue(r, c, (originalWeight - deltaWeight));
+    }
   }
 }
+
 
 Matrix* NeuralNetwork::getNeuronMatrix(int i) {
   return this->layers.at(i)->toMatrixVals();
