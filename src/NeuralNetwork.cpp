@@ -108,76 +108,56 @@ void NeuralNetwork::setErrors() {
 }
 
 void NeuralNetwork::backPropagation() {
-  cout << "Starting backPropagation..." << endl;
-
   vector<Matrix*> newWeights;
 
   // Output to hidden
   int outputLayerIndex = this->layers.size() - 1;
-  cout << "Output layer index: " << outputLayerIndex << endl;
-
   Matrix* derivedValuesYToZ = this->layers.at(outputLayerIndex)->toMatrixDerivedVals();
-  cout << "derivedValuesYToZ created with dimensions: " << derivedValuesYToZ->getNumRows() << "x" << derivedValuesYToZ->getNumCols() << endl;
 
   // Matrix for the gradients, isRandom false just for good practice
   Matrix* gradientsYToZ = new Matrix(1, this->layers.at(outputLayerIndex)->getNeurons().size(), false);
-  cout << "gradientsYToZ created with dimensions: " << gradientsYToZ->getNumRows() << "x" << gradientsYToZ->getNumCols() << endl;
 
   for (int i = 0; i < this->errors.size(); i++) {
     double d = derivedValuesYToZ->getValue(0, i);
     double e = this->errors.at(i);
     double g = d * e;
 
-    cout << "Error: " << e << ", Derived value: " << d << ", Gradient: " << g << endl;
-
     gradientsYToZ->setValue(0, i, g);
   }
 
   int lastHiddenLayerIndex = outputLayerIndex - 1;
-  cout << "Last hidden layer index: " << lastHiddenLayerIndex << endl;
-
   Layer* lastHiddenLayer = this->layers.at(lastHiddenLayerIndex);
 
   // Matrices
   Matrix* weightsOutputHidden = this->weightMatrices.at(outputLayerIndex - 1);
-  cout << "weightsOutputHidden dimensions: " << weightsOutputHidden->getNumRows() << "x" << weightsOutputHidden->getNumCols() << endl;
 
   Matrix* deltaOutputHidden = (new utils::MultiplyMatrix(
     gradientsYToZ->transpose(),
     lastHiddenLayer->toMatrixActivatedVals())
   )->execute()->transpose();
-  cout << "deltaOutputHidden created with dimensions: " << deltaOutputHidden->getNumRows() << "x" << deltaOutputHidden->getNumCols() << endl;
 
   Matrix* newWeightsOutputToHidden = new Matrix(
     deltaOutputHidden->getNumRows(),
     deltaOutputHidden->getNumCols(),
     false
   );
-  cout << "newWeightsOutputToHidden created with dimensions: " << newWeightsOutputToHidden->getNumRows() << "x" << newWeightsOutputToHidden->getNumCols() << endl;
 
   for (int r = 0; r < deltaOutputHidden->getNumRows(); r++) {
     for (int c = 0; c < deltaOutputHidden->getNumCols(); c++) {
       double originalWeight = weightsOutputHidden->getValue(r, c);
       double deltaWeight = deltaOutputHidden->getValue(r, c);
 
-      cout << "Original weight: " << originalWeight << ", Delta weight: " << deltaWeight << endl;
-
       newWeightsOutputToHidden->setValue(r, c, (originalWeight - deltaWeight));
     }
   }
 
   newWeights.push_back(newWeightsOutputToHidden);
-  cout << "New weights matrix added to newWeights vector." << endl;
 
   // Moving from last hidden layer down to input layer
   // for (int i = outputLayerIndex -1; i >= 0; i--) {
 
   // }
-
-  cout << "BackPropagation completed." << endl;
 }
-
-
 
 Matrix* NeuralNetwork::getNeuronMatrix(int i) {
   return this->layers.at(i)->toMatrixVals();
