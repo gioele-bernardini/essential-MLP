@@ -109,6 +109,7 @@ void NeuralNetwork::setErrors() {
 
 void NeuralNetwork::backPropagation() {
   vector<Matrix*> newWeights;
+  Matrix* gradients;
 
   // Output to hidden
   int outputLayerIndex = this->layers.size() - 1;
@@ -152,14 +153,36 @@ void NeuralNetwork::backPropagation() {
   }
 
   newWeights.push_back(newWeightsOutputToHidden);
-
-  cout << "Output to Hidden new Weights: " << endl;
-  newWeightsOutputToHidden->printToConsole();
+  // WATCH OUT HERE
+  gradients = new Matrix(
+    gradientsYToZ->getNumRows(), gradientsYToZ->getNumCols(),
+    false
+  );
+  for (int r = 0; r < gradientsYToZ->getNumRows(); r++) {
+    for (int c = 0; c < gradientsYToZ->getNumCols(); c++) {
+      gradients->setValue(r, c, gradientsYToZ->getValue(r, c));
+    }
+  }
 
   // Moving from last hidden layer down to input layer
-  // for (int i = outputLayerIndex -1; i >= 0; i--) {
+  for (int i = outputLayerIndex -1; i >= 0; i--) {
+    Layer* l = this->layers.at(i);
+    Matrix* derivedHidden = l->toMatrixDerivedVals();
 
-  // }
+    Matrix* derivedGradients = new Matrix(
+      1,
+      l->getNeurons().size(),
+      false
+    );
+
+    Matrix* weightMatrix = this->weightMatrices.at(i);
+
+    for (int r = 0; r < weightMatrix->getNumRows(); r++) {
+      for (int c = 0; c < weightMatrix->getNumCols(); c++) {
+        
+      }
+    }
+  }
 }
 
 Matrix* NeuralNetwork::getNeuronMatrix(int i) {
