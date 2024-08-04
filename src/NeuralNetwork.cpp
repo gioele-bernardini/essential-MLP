@@ -109,7 +109,7 @@ void NeuralNetwork::setErrors() {
 
 void NeuralNetwork::backPropagation() {
   vector<Matrix*> newWeights;
-  Matrix* gradients;
+  Matrix* gradient;
 
   // Output to hidden
   int outputLayerIndex = this->layers.size() - 1;
@@ -153,14 +153,13 @@ void NeuralNetwork::backPropagation() {
   }
 
   newWeights.push_back(newWeightsOutputToHidden);
-  // WATCH OUT HERE
-  gradients = new Matrix(
+  gradient = new Matrix(
     gradientsYToZ->getNumRows(), gradientsYToZ->getNumCols(),
     false
   );
   for (int r = 0; r < gradientsYToZ->getNumRows(); r++) {
     for (int c = 0; c < gradientsYToZ->getNumCols(); c++) {
-      gradients->setValue(r, c, gradientsYToZ->getValue(r, c));
+      gradient->setValue(r, c, gradientsYToZ->getValue(r, c));
     }
   }
 
@@ -168,6 +167,7 @@ void NeuralNetwork::backPropagation() {
   for (int i = outputLayerIndex -1; i >= 0; i--) {
     Layer* l = this->layers.at(i);
     Matrix* derivedHidden = l->toMatrixDerivedVals();
+    Matrix* activatedHidden = l->toMatrixActivatedVals();
 
     Matrix* derivedGradients = new Matrix(
       1,
@@ -176,10 +176,46 @@ void NeuralNetwork::backPropagation() {
     );
 
     Matrix* weightMatrix = this->weightMatrices.at(i);
+    Matrix* originalWeight = this->weightMatrices.at(i -1);
 
     for (int r = 0; r < weightMatrix->getNumRows(); r++) {
+      double sum = 0.00;
       for (int c = 0; c < weightMatrix->getNumCols(); c++) {
-        
+        double p = gradient->getValue(r, c) * weightMatrix->getValue(r, c);
+        sum += p;
+      }
+
+      double g = sum * activatedHidden->getValue(0, r);
+      derivedGradients->setValue(0, r, g);
+    }
+
+    Matrix* leftNeurons = (i -1) == 0 ? this->layers.at(0)->toMatrixVals() : this->layers.at(i -1)->toMatrixActivatedVals();
+
+    Matrix* deltaWeights = (new utils::MultiplyMatrix(derivedGradients->transpose(), leftNeurons))->execute()->transpose();
+    Matrix* newWeightsHidden = new Matrix(
+      deltaWeights->getNumRows(),
+      deltaWeights->getNumCols(),
+      false
+    );
+
+    for (int r = 0; r < newWeightsHidden->getNumRows(); r++) {
+      for (int c = 0; c < newWeightsHidden->getNumCols(); c++) {
+        double d = originalWeight->getValue(r, c);
+        double d = deltaWeights->getValue(r, c);
+
+        double n = w - d;
+        newWeightsHidden->setValue(r, c, n);
+      }
+    }
+
+    newWeights.push_back(newWeightsHidden);  
+    gradient = new Matrix(
+    derivedGradients->getNumRows(), gradientsYToZ->getNumCols(),
+    false
+    );
+    for (int r = 0; r < derivedGradients->getNumRows(); r++) {
+      for (int c = 0; c < derivedGradients->getNumCols(); c++) {
+        gradient->setValue(r, c, derivedGradients->getValue(r, c));
       }
     }
   }
