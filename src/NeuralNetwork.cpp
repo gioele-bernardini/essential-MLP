@@ -153,6 +153,9 @@ void NeuralNetwork::backPropagation() {
 
   newWeights.push_back(newWeightsOutputToHidden);
 
+  cout << "Output to Hidden new Weights: " << endl;
+  newWeightsOutputToHidden->printToConsole();
+
   // Moving from last hidden layer down to input layer
   // for (int i = outputLayerIndex -1; i >= 0; i--) {
 
