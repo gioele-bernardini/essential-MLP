@@ -4,6 +4,7 @@
 #include "Layer.hpp"
 #include "Matrix.hpp"
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 

@@ -243,6 +243,13 @@ void NeuralNetwork::backPropagation() {
       }
     }
   }
+
+  cout << "Done with back prop" << endl;
+  cout << "New Weights size: " << newWeights.size() << endl;
+  cout << "Old Weights size: " << this->weightMatrices.size() << endl;
+
+  reverse(newWeights.begin(), newWeights.end());
+  this->weightMatrices = newWeights;
 }
 
 Matrix* NeuralNetwork::getNeuronMatrix(int i) {
