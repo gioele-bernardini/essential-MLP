@@ -39,7 +39,9 @@ public:
 
   Matrix* getWeightMatrix(int i);
 
-  void printToConsole();
+  void printInputToConsole();
+  void printOutputToConsole();
+  void printTargetToConsole();
   void printWeightMatrix(int i);
 
   double getTotalError() { return this->error; }

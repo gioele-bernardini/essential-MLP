@@ -4,7 +4,8 @@
 
 using namespace std;
 
-#define N_EPOCH 5
+// Too high will result in over-fitting
+#define N_EPOCHS 100
 
 int main(int argc, char** argv) {
   vector<double> input;
@@ -22,12 +23,22 @@ int main(int argc, char** argv) {
   nn->setCurrentTarget(input);
 
   // Training Process
-  for (int i = 0; i < N_EPOCH; i++) {
+  for (int i = 0; i < N_EPOCHS; i++) {
+    cout << "Epoch: " << i << endl;
     nn->feedForward();
     nn->setErrors();
+    cout << "Total Error: " << nn->getTotalError() << endl;
     nn->backPropagation();
 
-    cout << "Total Error" << nn->getTotalError() << endl;
+    cout << "====================" << endl;
+    cout << "OUTPUT: "; 
+    nn->printOutputToConsole();
+
+    cout << "TARGET: ";
+    nn->printInputToConsole();
+    cout << "====================" << endl;
+
+    cout << endl;
   }
 
   return 0;

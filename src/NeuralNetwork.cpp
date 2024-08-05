@@ -29,21 +29,31 @@ void NeuralNetwork::setCurrentInput(vector<double> input) {
   }
 }
 
-void NeuralNetwork::printToConsole() {
-  for (int i = 0; i < this->layers.size(); i++) {
-    cout << "LAYER: " << i << endl;
-
-    // First layer (input)
-    if (i == 0) {
-      Matrix* m = this->layers.at(i)->toMatrixVals();
-      m->printToConsole();
-      delete m;
-    } else {
-      Matrix* m = this->layers.at(i)->toMatrixActivatedVals();
-      m->printToConsole();
-      delete m;
-    }
+void NeuralNetwork::printInputToConsole() {
+  for (int i = 0; i < this->input.size(); i++) {
+    cout << this->input.at(i) << "\t";
   }
+
+  cout << endl;
+}
+
+void NeuralNetwork::printOutputToConsole() {
+  int indexOfOutLayer = this->layers.size() -1;
+  Matrix* outputValues = this->layers.at(indexOfOutLayer)->toMatrixActivatedVals();
+
+  for (int c = 0; c < outputValues->getNumCols(); c++) {
+    cout << outputValues->getValue(0, c) << "\t";
+  }
+
+  cout << endl;
+}
+
+void NeuralNetwork::printTargetToConsole() {
+  for (int i = 0; i < this->target.size(); i++) {
+    cout << this->target.at(i) << "\t";
+  }
+
+  cout << endl;
 }
 
 void NeuralNetwork::printWeightMatrix(int i) {
