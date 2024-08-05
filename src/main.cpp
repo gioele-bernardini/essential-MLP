@@ -5,7 +5,7 @@
 using namespace std;
 
 // Too high will result in over-fitting
-#define N_EPOCHS 100
+#define N_EPOCHS 1000
 
 int main(int argc, char** argv) {
   vector<double> input;

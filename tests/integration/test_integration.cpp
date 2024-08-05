@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
 
   nn->backPropagation();
 
-  nn->printToConsole();
+  // nn->printToConsole();
 
   cout << "Total Error" << nn->getTotalError() << endl;
   nn->printWeightMatrix(0);

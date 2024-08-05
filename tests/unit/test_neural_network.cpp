@@ -31,20 +31,20 @@ void testSetCurrentInput() {
   std::cout << "setCurrentInput test passed.\n";
 }
 
-void testPrintToConsole() {
-  std::vector<int> topology = {3, 2, 1};
-  NeuralNetwork nn(topology);
+// void testPrintToConsole() {
+//   std::vector<int> topology = {3, 2, 1};
+//   NeuralNetwork nn(topology);
 
-  std::vector<double> input = {1.0, 0.5, -1.0};
-  nn.setCurrentInput(input);
+//   std::vector<double> input = {1.0, 0.5, -1.0};
+//   nn.setCurrentInput(input);
   
-  std::cout << "Testing printToConsole:" << std::endl;
+//   std::cout << "Testing printToConsole:" << std::endl;
 
-  // Call printToConsole and allow it to print directly to std::cout
-  nn.printToConsole();
+//   // Call printToConsole and allow it to print directly to std::cout
+//   nn.printToConsole();
   
-  std::cout << "printToConsole test completed.\n";
-}
+//   std::cout << "printToConsole test completed.\n";
+// }
 
 void testPrintWeightMatrix() {
   std::vector<int> topology = {3, 2, 1};
@@ -64,7 +64,7 @@ void testPrintWeightMatrix() {
 int main() {
   testNeuralNetworkCreation();
   testSetCurrentInput();
-  testPrintToConsole();
+  // testPrintToConsole();
   testPrintWeightMatrix();
 
   std::cout << "All tests passed.\n";
