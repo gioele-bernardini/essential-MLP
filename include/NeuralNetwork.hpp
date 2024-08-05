@@ -42,7 +42,9 @@ public:
   void printInputToConsole();
   void printOutputToConsole();
   void printTargetToConsole();
+  
   void printWeightMatrix(int i);
+  void printHistoricalErrors();
 
   double getTotalError() { return this->error; }
   vector<double> getErrors() { return this->errors; }

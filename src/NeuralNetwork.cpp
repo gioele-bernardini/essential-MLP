@@ -1,6 +1,7 @@
 #include "NeuralNetwork.hpp"
 #include "Matrix.hpp"
 #include "utils/MultiplyMatrix.hpp"
+#include <cmath>
 #include <vector>
 
 NeuralNetwork::NeuralNetwork(vector<int> topology) {
@@ -60,6 +61,17 @@ void NeuralNetwork::printWeightMatrix(int i) {
   this->weightMatrices.at(i)->printToConsole();
 }
 
+void NeuralNetwork::printHistoricalErrors() {
+  for (int i = 0; i < this->historicalErrors.size(); i++) {
+    cout << this->historicalErrors.at(i);
+    if (i != this->historicalErrors.size() -1) {
+      cout << ", ";
+    }
+  }
+
+  cout << endl;
+}
+
 // Feed Forward algorithm
 void NeuralNetwork::feedForward() {
   for (int i = 0; i < (this->layers.size() - 1); i++) {
@@ -111,8 +123,10 @@ void NeuralNetwork::setErrors() {
   for (int i = 0; i < target.size(); i++) {
     double tempErr = (outputNeurons.at(i)->getActivatedVal() - target.at(i));
     errors.at(i) = tempErr;
-    this->error += tempErr;
+    this->error += pow(tempErr, 2);
   }
+
+  this->error = 0.5 * this->error;
 
   historicalErrors.push_back(this->error);
 }
