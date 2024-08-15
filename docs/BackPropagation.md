@@ -27,12 +27,14 @@ Let's delve deeper into the code you provided to understand how backpropagation 
 
    The gradient is calculated using the chain rule from calculus. For each neuron, the gradient of the error with respect to the neuron's output is calculated as:
 
-   \[
-   \delta = \text{activation derivative} \times \text{error}
-   \]
+  <div align="center">
 
-   - **Activation Derivative:** This is the derivative of the activation function used in the neuron (e.g., sigmoid, ReLU). It determines how much the output of the neuron changes with respect to its input. In mathematical terms, if the activation function is \( f(z) \), its derivative \( f'(z) \) is used to scale the error.
-   - **Error:** The error term for a neuron in the output layer is simply the difference between the neuron's output and the target value.
+  $\delta = \text{activation derivative} \times \text{error}$
+
+  </div>
+
+  - **Activation Derivative:** This is the derivative of the activation function used in the neuron (e.g., sigmoid, ReLU). It determines how much the output of the neuron changes with respect to its input. In mathematical terms, if the activation function is $f(z)$, its derivative $f'(z)$ is used to scale the error.
+  - **Error:** The error term for a neuron in the output layer is simply the difference between the neuron's output and the target value.
 
    In the code:
 
@@ -51,16 +53,19 @@ Let's delve deeper into the code you provided to understand how backpropagation 
 
    The calculated gradients are used to determine how the weights should be adjusted. The weight adjustment (often called delta weights) is calculated as:
 
-   \[
-   \Delta w = \eta \times \delta \times \text{input}
-   \]
+  <div align="center">
 
-   Where:
-   - \( \eta \) (eta) is the learning rate, a small value that controls how much the weights are adjusted.
-   - \( \delta \) is the gradient we calculated earlier.
-   - The input is the output from the previous layer.
+  $\Delta w = \eta \times \delta \times \text{input}$
 
-   The weights are then updated by subtracting the delta weights:
+  </div>
+
+  Where:
+  - $\eta$ (eta) is the learning rate, a small value that controls how much the weights are adjusted.
+  - $\delta$ is the gradient we calculated earlier.
+  - The input is the output from the previous layer.
+
+
+  The weights are then updated by subtracting the delta weights:
 
    ```cpp
    Matrix* deltaOutputHidden = (new utils::MultiplyMatrix(
